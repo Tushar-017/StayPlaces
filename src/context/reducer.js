@@ -2,6 +2,7 @@
 const reducer = (state, action) => {
   switch (action.type /* get the type from the action object */) {
     case "UPDATE_USER":
+      localStorage.setItem("currentUser", JSON.stringify(action.payload))
       return { ...state, currentUser: action.payload }
     case "UPDATE_ALERT":
       return { ...state, alert: action.payload }
