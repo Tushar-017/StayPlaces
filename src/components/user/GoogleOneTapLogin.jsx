@@ -8,13 +8,19 @@ import jwtDecode from "jwt-decode"
 const GoogleOneTapLogin = () => {
   const { dispatch } = useValue()
   const [disabled, setDisabled] = useState(false)
+
   const handleResponse = (response) => {
     const token = response.credential
     const decodeToken = jwtDecode(token)
+    // console.log(decodeToken)
     const { sub: id, email, name, picture: photoURL } = decodeToken
-    dispatch({ type: "UPDATE_USER", payload: { id, email, name, photoURL } })
+    dispatch({
+      type: "UPDATE_USER",
+      payload: { id, email, name, photoURL, token, google: true },
+    })
     dispatch({ type: "CLOSE_LOGIN" })
   }
+
   const handleGoogleLogin = () => {
     setDisabled(true)
     try {
