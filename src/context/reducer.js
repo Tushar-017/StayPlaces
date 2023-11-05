@@ -6,6 +6,8 @@ const reducer = (state, action) => {
       return { ...state, currentUser: action.payload }
     case "UPDATE_ALERT":
       return { ...state, alert: action.payload }
+    case "UPDATE_PROFILE":
+      return { ...state, profile: action.payload }
     case "OPEN_LOGIN":
       return { ...state, openLogin: true }
     case "CLOSE_LOGIN":
