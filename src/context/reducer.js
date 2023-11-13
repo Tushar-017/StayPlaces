@@ -8,6 +8,13 @@ const reducer = (state, action) => {
       return { ...state, alert: action.payload }
     case "UPDATE_PROFILE":
       return { ...state, profile: action.payload }
+    case "UPDATE_IMAGES":
+      return { ...state, images: [...state.images, action.payload] }
+    case "DELETE_IMAGE":
+      return {
+        ...state,
+        images: state.images.filter((image) => image !== action.payload),
+      }
     case "OPEN_LOGIN":
       return { ...state, openLogin: true }
     case "CLOSE_LOGIN":

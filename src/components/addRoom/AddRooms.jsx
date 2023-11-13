@@ -8,11 +8,15 @@ import {
   StepButton,
   Stepper,
 } from "@mui/material"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import AddDetails from "./addDetails/AddDetails"
 import AddImages from "./addImages/AddImages"
+import { useValue } from "../../context/ContextProvider"
 
 const AddRooms = () => {
+  const {
+    state: { images },
+  } = useValue()
   const [activeStep, setActiveStep] = useState(0)
   const [steps, setSteps] = useState([
     { label: "Location", completed: false },
@@ -38,6 +42,21 @@ const AddRooms = () => {
 
   const findUnfinished = () => {
     return steps.findIndex((steps) => !steps.completed)
+  }
+
+  useEffect(() => {
+    if (images.length) {
+      if (!steps[2].completed) setComplete(2, true)
+    } else {
+      if (steps[2].completed) setComplete(2, false)
+    }
+  }, [images])
+
+  const setComplete = (index, status) => {
+    setSteps((steps) => {
+      steps[index].completed = status
+      return [...steps]
+    })
   }
 
   return (
